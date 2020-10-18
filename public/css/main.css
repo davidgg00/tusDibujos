@@ -1,0 +1,41 @@
+html,body {
+    height: 98vh !important;
+}
+#app {
+    height: 100%;
+}
+body {
+    background: url('../images/fondo.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+header {
+    background: #292929;
+    height: 10% !important;
+}
+
+nav a {
+    font-size: 1.3em;
+}
+
+header h3 {
+    color:#40B6E3;
+    font-size: 2rem;
+    margin: 0 auto;
+}
+
+.fotoPost {
+    width: 50%;
+}
+
+nav a {
+    color: white;
+}
+
+nav a:hover {
+    color: #B4F0D9;
+    text-decoration: none;
+}
