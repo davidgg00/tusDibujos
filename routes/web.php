@@ -26,3 +26,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/prueba', 'App\Http\Controllers\UsuarioController@index');
 Route::post('/vuelogin', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
+
+Route::get('/testeo', 'App\Http\Controllers\HomeController@index');

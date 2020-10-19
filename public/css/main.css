@@ -27,6 +27,10 @@ header h3 {
     margin: 0 auto;
 }
 
+.post {
+    margin-bottom: 10%;
+}
+
 .fotoPost {
     width: 50%;
 }

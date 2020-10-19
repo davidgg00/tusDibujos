@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PostDibujo;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\PostDec;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = PostDibujo::all();
+        
+        return view('home',["posts"=>$posts]);
     }
 }

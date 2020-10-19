@@ -19,28 +19,52 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <header class="col-md-12 border border-blue d-flex justify-content-between p-0">
+            <div id="plataforma" class="col-md-2 border d-flex align-items-center text-center p-0">
+                <h3 class="font-weight-bold">TUS DIBUJOS</h3>
+            </div>
+            <nav class="col-md-7 p-0 d-flex align-items-center justify-content-around">
+                <a href="{{ url('/') }}">Inicio</a>
+                <a href="#">Aleatorio</a>
+                <a href="#">Mejores</a>
+                <a href="#">Subir Dibujo</a>
+
+                @if (!Auth::check())
+                <a href="{{ __('login') }}">Iniciar Sesión</a>
+                <a href="{{ __('register') }}">Registrate</a>
+                @else
+                <a href="{{ __('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                {{ Auth::user()->username }}
+                @endif
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </nav>
+        </header>
+        <!--  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'TUSDIBUJOS') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                  
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                  
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                        
                         @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -71,7 +95,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
 
         <main class="py-4">
             @yield('content')

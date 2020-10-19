@@ -9,6 +9,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    protected $table = 'usuarios';
+
+    protected $primaryKey = "username";
+
+    public $timestamps = false;
+
+    public $incrementing = false;
     use HasFactory, Notifiable;
 
     /**
@@ -31,4 +38,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function comentario()
+    {
+        return $this->hasMany('App\Models\Comentario', 'usuario', 'username');
+    }
+
+    public function postdibujo()
+    {
+        return $this->hasMany('App\Models\PostDibujo', 'usuario', 'username');
+    }
 }
