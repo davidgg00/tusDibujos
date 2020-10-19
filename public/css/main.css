@@ -43,3 +43,15 @@ nav a:hover {
     color: #B4F0D9;
     text-decoration: none;
 }
+
+.likeImagen {
+    width: 50px;
+}
+
+.likeImagen:hover {
+    cursor: pointer;
+}
+
+.num_like {
+    font-size: 2rem;
+}

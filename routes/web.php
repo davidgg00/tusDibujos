@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('home');
-});
+}); */
 
 Auth::routes();
 
@@ -27,4 +27,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/prueba', 'App\Http\Controllers\UsuarioController@index');
 Route::post('/vuelogin', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
-Route::get('/testeo', 'App\Http\Controllers\HomeController@index');
+Route::get('/', 'App\Http\Controllers\HomeController@index');

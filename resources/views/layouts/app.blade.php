@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/main.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,8 +25,8 @@
 
 <body>
     <div id="app">
-        <header class="col-md-12 border border-blue d-flex justify-content-between p-0">
-            <div id="plataforma" class="col-md-2 border d-flex align-items-center text-center p-0">
+        <header class="col-md-12 d-flex justify-content-between p-0">
+            <div id="plataforma" class="col-md-2 d-flex align-items-center text-center p-0">
                 <h3 class="font-weight-bold">TUS DIBUJOS</h3>
             </div>
             <nav class="col-md-7 p-0 d-flex align-items-center justify-content-around">
