@@ -11,11 +11,20 @@ class PostDibujo extends Model
 
     protected $table = 'postdibujos';
 
-    protected $primaryKey = "username";
+    protected $primaryKey = "id";
 
     public $timestamps = false;
 
     public $incrementing = false;
+
+    protected $fillable = [
+        'titulo',
+        'img_url',
+        'fecha',
+        'valoracion',
+        'usuario_username'
+    ];
+
 
     public function usuario()
     {
@@ -27,7 +36,8 @@ class PostDibujo extends Model
         return $this->hasMany('App\Comentarios', 'post', 'id');
     }
 
-    public function usuariolikes(){
+    public function usuariolikes()
+    {
         return $this->hasMany('App\Models\UsuarioLikes', 'post_id', 'id');
     }
 }

@@ -6,6 +6,8 @@ use App\Models\PostDibujo;
 use App\Models\UsuarioLikes;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class HomeController extends Controller
 {
     /**
@@ -27,12 +29,14 @@ class HomeController extends Controller
     {
         $likes = "";
         if (Auth::user()) {
-            $likes = UsuarioLikes::all()->where('usuario_username',Auth::user()->username);
+            $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
         } else {
             $likes = array();
         }
+
+
         $posts = PostDibujo::all();
-        
-        return view('home',["posts"=>$posts, "likes"=>$likes]);
+
+        return view('home', ["posts" => $posts, "likes" => $likes]);
     }
 }

@@ -15,6 +15,7 @@ class CrearTablaPostdibujos extends Migration
     {
         Schema::create('postdibujos', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
+            $table->string('titulo', 25);
             $table->string('img_url');
             $table->date('fecha');
             $table->integer('valoracion');

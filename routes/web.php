@@ -30,6 +30,7 @@ Route::post('/vuelogin', 'App\Http\Controllers\Auth\LoginController@showLoginFor
 Route::get('/', 'App\Http\Controllers\HomeController@index');
 
 
-Route::get('/testeo', 'App\Http\Controllers\PostDibujoController@index');
-Route::post('/likePost/{id}',"App\Http\Controllers\PostDibujoController@like");
-Route::post('/quitarlikePost/{id}',"App\Http\Controllers\PostDibujoController@quitarLike");
+Route::get('/subirDibujo', 'App\Http\Controllers\UsuarioController@subirDibujo')->name('subirDibujo');
+Route::post('/likePost/{id}', "App\Http\Controllers\PostDibujoController@like");
+Route::post('/quitarlikePost/{id}', "App\Http\Controllers\PostDibujoController@quitarLike");
+Route::post('/subidaDibujo', "App\Http\Controllers\PostDibujoController@subirDibujo")->name('subidaDibujo');

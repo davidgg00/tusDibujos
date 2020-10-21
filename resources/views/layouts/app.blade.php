@@ -33,7 +33,7 @@
                 <a href="{{ url('/') }}">Inicio</a>
                 <a href="#">Aleatorio</a>
                 <a href="#">Mejores</a>
-                <a href="#">Subir Dibujo</a>
+                <a href="{{route('subirDibujo')}}">Subir Dibujo</a>
 
                 @if (!Auth::check())
                 <a href="{{ __('login') }}">Iniciar Sesión</a>

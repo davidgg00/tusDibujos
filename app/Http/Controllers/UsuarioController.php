@@ -25,6 +25,11 @@ class UsuarioController extends Controller
         //echo json_encode($examenesUsuario);
     }
 
+    public function subirDibujo()
+    {
+        return view('subirDibujo');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -6,6 +6,7 @@ use App\Models\PostDibujo;
 use App\Models\UsuarioLikes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 class PostDibujoController extends Controller
@@ -21,9 +22,10 @@ class PostDibujoController extends Controller
         $usuarioLike->save();
     }
 
-    public function quitarLike($id){
-        PostDibujo::where('id', $id)->decrement('valoracion',1);
-        UsuarioLikes::where('usuario_username', Auth::user()->username);
+    public function quitarLike($id)
+    {
+        PostDibujo::where('id', $id)->decrement('valoracion', 1);
+        UsuarioLikes::where('usuario_username', Auth::user()->username)->where('post_id', $id)->delete();
     }
 
     /**
@@ -33,76 +35,36 @@ class PostDibujoController extends Controller
      */
     public function index()
     {
-        $usuarios = UsuarioLikes::all()->where('usuario_username','davidgg00');
+        $usuarios = UsuarioLikes::all()->where('usuario_username', 'davidgg00');
         print_r($usuarios);
-        
-        
+
+
         //print_r(UsuarioLikes::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function subirDibujo(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PostDibujo  $postDibujo
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PostDibujo $postDibujo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PostDibujo  $postDibujo
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PostDibujo $postDibujo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PostDibujo  $postDibujo
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PostDibujo $postDibujo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PostDibujo  $postDibujo
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PostDibujo $postDibujo)
-    {
-        //
+        if ($request->hasFile('dibujo')) {
+            //  Let's do everything here
+            if ($request->file('dibujo')->isValid()) {
+                //
+                $validated = $request->validate([
+                    'titulo' => 'string|max:25',
+                    'dibujo' => 'mimes:jpeg,png|max:1014',
+                ]);
+                $extension = $request->dibujo->getClientOriginalExtension();
+                $request->dibujo->storeAs('/public', time() . "." . $extension);
+                $url = Storage::url(time() . "." . $extension);
+                $dibujo = PostDibujo::create([
+                    'titulo' => $validated['titulo'],
+                    'img_url' => $url,
+                    'fecha' => date('Y-m-d'),
+                    'valoracion' => '0',
+                    'usuario_username' => Auth::user()->username
+                ]);
+            }
+        }
+        return redirect("/");
     }
 }
