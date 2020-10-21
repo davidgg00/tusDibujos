@@ -26,4 +26,8 @@ class PostDibujo extends Model
     {
         return $this->hasMany('App\Comentarios', 'post', 'id');
     }
+
+    public function usuariolikes(){
+        return $this->hasMany('App\Models\UsuarioLikes', 'post_id', 'id');
+    }
 }

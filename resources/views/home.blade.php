@@ -3,8 +3,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <?php $likedado = false ?>
         @foreach ($posts as $post)
-        <div class="post col-md-7 border bg-white">
+
+        <div class="post col-md-7 border bg-white" id="{{$post->id}}">
             <div class="cabeceraPost d-flex justify-content-between p-2">
                 <span>Titulo del Post</span>
                 <span>Publicado por {{$post->usuario_username}} el {{$post->fecha}}</span>
@@ -13,7 +15,13 @@
                 <img src="{{$post->img_url}}" alt="imagen del post" class="img-fluid fotoPost d-block mx-auto" />
             </div>
             <div class="wrapperLike text-center d-flex justify-content-around col-md-3 mx-auto m-2">
-                <img src="{{ asset('images/like_0.svg') }}" class="likeImagen likeFalse"> <span class="num_like">0</span>
+
+                @foreach ($likes as $like)
+                @if($like->post_id == $post->id)
+                <img src="{{ asset('images/like_1.svg') }}" class="likeImagen likeTrue" id="{{$post->id}}"> <span class="num_like">{{$post->valoracion}}</span>
+                <input type="hidden" name="_token" id="{{$post->id}}" value="{{csrf_token()}}"></input>
+                @endif
+                @endforeach
             </div>
         </div>
         @endforeach

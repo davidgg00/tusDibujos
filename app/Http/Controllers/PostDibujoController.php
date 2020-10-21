@@ -3,10 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostDibujo;
+use App\Models\UsuarioLikes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostDibujoController extends Controller
 {
+
+    public function like($id)
+    {
+        PostDibujo::where('id', $id)->increment('valoracion');
+        $usuarioLike = new UsuarioLikes;
+        $usuarioLike->usuario_username = Auth::user()->username;
+        $usuarioLike->post_id = $id;
+        $usuarioLike->fecha = now();
+        $usuarioLike->save();
+    }
+
+    public function quitarLike($id){
+        PostDibujo::where('id', $id)->decrement('valoracion',1);
+        UsuarioLikes::where('usuario_username', Auth::user()->username);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +33,11 @@ class PostDibujoController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = UsuarioLikes::all()->where('usuario_username','davidgg00');
+        print_r($usuarios);
+        
+        
+        //print_r(UsuarioLikes::all());
     }
 
     /**

@@ -41,11 +41,15 @@ class User extends Authenticatable
 
     public function comentario()
     {
-        return $this->hasMany('App\Models\Comentario', 'usuario', 'username');
+        return $this->hasMany('App\Models\Comentario', 'usuario_username', 'username');
     }
 
     public function postdibujo()
     {
-        return $this->hasMany('App\Models\PostDibujo', 'usuario', 'username');
+        return $this->hasMany('App\Models\PostDibujo', 'usuario_username', 'username');
+    }
+
+    public function usuariolikes(){
+        return $this->hasMany('App\Models\UsuarioLikes', 'usuario_username', 'username');
     }
 }

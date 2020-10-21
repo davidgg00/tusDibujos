@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostDibujo;
-use Illuminate\Http\Request;
-use PhpParser\Node\Expr\PostDec;
+use App\Models\UsuarioLikes;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,8 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $likes = "";
+        if (Auth::user()) {
+            $likes = UsuarioLikes::all()->where('usuario_username',Auth::user()->username);
+        } else {
+            $likes = array();
+        }
         $posts = PostDibujo::all();
         
-        return view('home',["posts"=>$posts]);
+        return view('home',["posts"=>$posts, "likes"=>$likes]);
     }
 }

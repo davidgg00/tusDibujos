@@ -28,3 +28,8 @@ Route::get('/prueba', 'App\Http\Controllers\UsuarioController@index');
 Route::post('/vuelogin', 'App\Http\Controllers\Auth\LoginController@showLoginForm');
 
 Route::get('/', 'App\Http\Controllers\HomeController@index');
+
+
+Route::get('/testeo', 'App\Http\Controllers\PostDibujoController@index');
+Route::post('/likePost/{id}',"App\Http\Controllers\PostDibujoController@like");
+Route::post('/quitarlikePost/{id}',"App\Http\Controllers\PostDibujoController@quitarLike");
