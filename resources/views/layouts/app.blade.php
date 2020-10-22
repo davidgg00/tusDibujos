@@ -31,8 +31,8 @@
             </div>
             <nav class="col-md-7 p-0 d-flex align-items-center justify-content-around">
                 <a href="{{ url('/') }}">Inicio</a>
-                <a href="#">Aleatorio</a>
-                <a href="#">Mejores</a>
+                <a href="{{route('random')}}">Aleatorio</a>
+                <a href="{{route('mejoresDibujos')}}">Mejores</a>
                 <a href="{{route('subirDibujo')}}">Subir Dibujo</a>
 
                 @if (!Auth::check())

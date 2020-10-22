@@ -37,9 +37,6 @@ class PostDibujoController extends Controller
     {
         $usuarios = UsuarioLikes::all()->where('usuario_username', 'davidgg00');
         print_r($usuarios);
-
-
-        //print_r(UsuarioLikes::all());
     }
 
 
@@ -59,12 +56,41 @@ class PostDibujoController extends Controller
                 $dibujo = PostDibujo::create([
                     'titulo' => $validated['titulo'],
                     'img_url' => $url,
-                    'fecha' => date('Y-m-d'),
+                    'fecha' => now(),
                     'valoracion' => '0',
                     'usuario_username' => Auth::user()->username
                 ]);
             }
         }
-        return redirect("/");
+        return redirect()->back()->with('mensaje', 'Has subido correctamente el dibujo!');;
+    }
+
+    public function mejoresDibujos(){
+        $likes = "";
+        if (Auth::user()) {
+            $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
+        } else {
+            $likes = array();
+        }
+
+
+        $posts = PostDibujo::orderBy('valoracion','DESC')->paginate(2);
+
+        return view('home', ["posts" => $posts, "likes" => $likes]);
+    }
+
+    public function randomDibujos(){
+        $likes = "";
+        if (Auth::user()) {
+            $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
+        } else {
+            $likes = array();
+        }
+
+
+        $posts = PostDibujo::inRandomOrder()->paginate(2);
+
+        return view('home', ["posts" => $posts, "likes" => $likes]);
+        
     }
 }

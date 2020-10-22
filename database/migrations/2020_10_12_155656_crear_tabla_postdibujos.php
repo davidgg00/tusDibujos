@@ -17,7 +17,7 @@ class CrearTablaPostdibujos extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('titulo', 25);
             $table->string('img_url');
-            $table->date('fecha');
+            $table->dateTime('fecha');
             $table->integer('valoracion');
             $table->string('usuario_username', 25);
 

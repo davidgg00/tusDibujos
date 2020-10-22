@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Comentario;
 use App\Models\PostDibujo;
 use App\Models\Usuario;
+Use Illuminate\Support\Facades\Facade;
 
 class UsuarioController extends Controller
 {
