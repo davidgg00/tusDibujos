@@ -6,10 +6,10 @@
         <?php $likedado = false ?>
         @foreach ($posts as $post)
 
-        <div class="post col-md-7 border bg-white" id="{{$post->id}}">
-            <div class="cabeceraPost d-flex justify-content-between p-2">
-                <span>{{$post->titulo}}</span>
-                <span>Publicado por {{$post->usuario_username}} el {{$post->fecha}}</span>
+        <div class="post col-md-7 bg-white" id="{{$post->id}}">
+            <div class="cabeceraPost d-flex justify-content-between p-2 flex-wrap">
+                <a href="{{ url('/post') }}/{{$post->id}}"><span class="col-12 col-md-4">{{$post->titulo}}</span></a>
+                <span class=" col-12 col-md-6">Publicado por {{$post->usuario_username}} el {{$post->fecha}}</span>
             </div>
             <div class="imagenPost mt-1">
                 <img src="{{$post->img_url}}" alt="imagen del post" class="img-fluid fotoPost d-block mx-auto" />
@@ -39,11 +39,11 @@
             </div>
         </div>
         @endforeach
-        
+
         <div class="paginacion col-md-12 text-center d-flex justify-content-center">
-        {{$posts->links("pagination::bootstrap-4")}}
+            {{$posts->links("pagination::bootstrap-4")}}
         </div>
     </div>
-   
+
 </div>
 @endsection

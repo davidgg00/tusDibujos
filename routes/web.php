@@ -33,7 +33,9 @@ Route::get('/', 'App\Http\Controllers\HomeController@index');
 Route::get('/subirDibujo', 'App\Http\Controllers\UsuarioController@subirDibujo')->name('subirDibujo');
 Route::get('/mejoresDibujos', 'App\Http\Controllers\PostDibujoController@mejoresDibujos')->name('mejoresDibujos');
 Route::get('/aleatorio', 'App\Http\Controllers\PostDibujoController@randomDibujos')->name('random');
+Route::get('/post/{id}', 'App\Http\Controllers\PostDibujoController@index')->name('post');
 
 Route::post('/likePost/{id}', "App\Http\Controllers\PostDibujoController@like");
 Route::post('/quitarlikePost/{id}', "App\Http\Controllers\PostDibujoController@quitarLike");
 Route::post('/subidaDibujo', "App\Http\Controllers\PostDibujoController@subirDibujo")->name('subidaDibujo');
+Route::post('/comentar', "App\Http\Controllers\PostDibujoController@comentar")->name('comentar');

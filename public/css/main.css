@@ -35,6 +35,14 @@ header h3 {
     width: 50%;
 }
 
+.fotoPostUnico {
+    width: 30%;
+}
+
+.userImage {
+    width: 150px;
+}
+
 nav a {
     color: white;
 }

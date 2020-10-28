@@ -64,5 +64,12 @@ $(document).ready(function () {
         }
     });
 
+    $(".responder").on("click", function () {
+        console.log($(this).attr('data-idcomentario'));
+        console.log($(".comentarios").find("[data-idtextocomentario='" + $(this).attr('data-idcomentario') + "'] p").html());
+        $("#labelComentario").html("Responde a @" + $(".comentarios").find("[data-idtextocomentario='" + $(this).attr('data-idcomentario') + "'] .username").html())
+        //$("#escribeComentario").html("@" + $(".comentarios").find("[data-idtextocomentario='" + $(this).attr('data-idcomentario') + "'] .username").html());
+        $("#idPostRespuesta").val($(this).attr('data-idcomentario'));
+    });
 
 });

@@ -26,77 +26,82 @@
 <body>
     <div id="app">
         <header class="col-md-12 d-flex justify-content-between p-0">
-            <div id="plataforma" class="col-md-2 d-flex align-items-center text-center p-0">
-                <h3 class="font-weight-bold">TUS DIBUJOS</h3>
-            </div>
-            <nav class="col-md-7 p-0 d-flex align-items-center justify-content-around">
-                <a href="{{ url('/') }}">Inicio</a>
-                <a href="{{route('random')}}">Aleatorio</a>
-                <a href="{{route('mejoresDibujos')}}">Mejores</a>
-                <a href="{{route('subirDibujo')}}">Subir Dibujo</a>
 
-                @if (!Auth::check())
-                <a href="{{ __('login') }}">Iniciar Sesión</a>
-                <a href="{{ __('register') }}">Registrate</a>
-                @else
-                <a href="{{ __('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar Sesión</a>
-                {{ Auth::user()->username }}
-                @endif
+            <nav class="navbar navbar-expand-md navbar-light bg-dark fixed-top d-flex justify-content-between">
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </nav>
-        </header>
-        <!--  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'TUSDIBUJOS') }}
+                <a class="navbar-brand">
+                    <h3 class="font-weight-bold">TUS DIBUJOS</h3>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+
+                <button type="button" class="navbar-toggler bg-light" data-toggle="collapse" data-target="#nav">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  
-                    <ul class="navbar-nav mr-auto">
+                <div class="collapse navbar-collapse col-md-6" id="nav">
 
-                    </ul>
+                    <ul class="navbar-nav d-flex justify-content-between">
 
-                  
-                    <ul class="navbar-nav ml-auto">
-                        
-                        @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{ url('/') }}">Inicio</a>
+
                         </li>
-                        @if (Route::has('register'))
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{route('random')}}">Aleatorio</a>
+
                         </li>
-                        @endif
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{route('mejoresDibujos')}}">Mejores</a>
+
+                        </li>
+
+                        @if(!Auth::check())
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{route('login')}}">Iniciar Sesión</a>
+
+                        </li>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{route('register')}}">Registrate</a>
+
+                        </li>
+
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->username }}
-                            </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                        <li class="nav-item">
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                            <a class="nav-link text-light font-weight-bold px-3" href="{{route('subirDibujo')}}">Subir Dibujo</a>
+
                         </li>
-                        @endguest
+
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-light font-weight-bold px-3" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+
+                        @endif
+
                     </ul>
+
+
+
+
                 </div>
-            </div>
-        </nav> -->
+
+            </nav>
+        </header>
+
 
         <main class="py-4">
             @yield('content')

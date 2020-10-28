@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comentario;
 use App\Models\PostDibujo;
 use App\Models\UsuarioLikes;
 use Illuminate\Http\Request;
@@ -33,10 +34,18 @@ class PostDibujoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $usuarios = UsuarioLikes::all()->where('usuario_username', 'davidgg00');
-        print_r($usuarios);
+        $likes = "";
+        if (Auth::user()) {
+            $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
+        } else {
+            $likes = array();
+        }
+
+        $post = PostDibujo::where('id', $id)->first();
+        $comentarios = Comentario::where('post_id', $id)->get();
+        return view('post', ["post" => $post, "likes" => $likes, "id" => $id, "comentarios" => $comentarios]);
     }
 
 
@@ -65,7 +74,26 @@ class PostDibujoController extends Controller
         return redirect()->back()->with('mensaje', 'Has subido correctamente el dibujo!');;
     }
 
-    public function mejoresDibujos(){
+    public function comentar(Request $request)
+    {
+        $validated = $request->validate([
+            'textoComentario' => 'string|max:25',
+        ]);
+
+        $comentario = new Comentario;
+        $comentario->usuario_username = Auth::user()->username;
+        $comentario->fecha = now();
+        $comentario->mensaje = $request->textoComentario;
+        $comentario->post_id = $request->idPost;
+        if ($request->idPostRespuesta) {
+            $comentario->comentario_id = $request->idPostRespuesta;
+        }
+        $comentario->save();
+        return redirect()->back()->with('mensaje', '¡Comentario Subido Correctamente!');;
+    }
+
+    public function mejoresDibujos()
+    {
         $likes = "";
         if (Auth::user()) {
             $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
@@ -74,12 +102,13 @@ class PostDibujoController extends Controller
         }
 
 
-        $posts = PostDibujo::orderBy('valoracion','DESC')->paginate(2);
+        $posts = PostDibujo::orderBy('valoracion', 'DESC')->paginate(2);
 
         return view('home', ["posts" => $posts, "likes" => $likes]);
     }
 
-    public function randomDibujos(){
+    public function randomDibujos()
+    {
         $likes = "";
         if (Auth::user()) {
             $likes = UsuarioLikes::all()->where('usuario_username', Auth::user()->username);
@@ -91,6 +120,5 @@ class PostDibujoController extends Controller
         $posts = PostDibujo::inRandomOrder()->paginate(2);
 
         return view('home', ["posts" => $posts, "likes" => $likes]);
-        
     }
 }
