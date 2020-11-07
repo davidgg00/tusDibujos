@@ -21,6 +21,8 @@ TusDibujos es una mini red social donde los usuarios podrán registrarse e inici
 ``php artisan key:generate``
 ``php artisan migrate``
 
-7-Arrancar la aplicación web ``php artisan serve``
+7-Enseñar imagenes almacenadas ``php artisan storage:link``
 
-8- Ir a localhost:8000
+8-Arrancar la aplicación web ``php artisan serve``
+
+9- Ir a localhost:8000
